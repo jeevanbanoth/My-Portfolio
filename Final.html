@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeevan Kumar Banoth - Data Science Portfolio</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #f0f4f8;
+            --text-color: #333333;
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --accent-color: #e74c3c;
+            --card-bg: #ffffff;
+        }
+
+        .dark-mode {
+            --bg-color: #2c3e50;
+            --text-color: #ecf0f1;
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --accent-color: #e74c3c;
+            --card-bg: #34495e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-color);
+        }
+
+        header {
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--card-bg);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary-color);
+            visibility: hidden;
+            transform: scaleX(0);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .nav-links a:hover::after {
+            visibility: visible;
+            transform: scaleX(1);
+        }
+
+        #theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        section {
+            padding: 6rem 0;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://source.unsplash.com/random/1920x1080/?technology');
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            text-align: center;
+            position: relative;
+        }
+
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 4px solid var(--primary-color);
+            margin-bottom: 2rem;
+            object-fit: cover;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 3rem;
+            margin: 2rem 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+
+        .education-grid, .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        .education-item, .experience-item {
+            padding: 2rem;
+            border-radius: 10px;
+            background: var(--card-bg);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .skills-section {
+            margin: 4rem 0;
+        }
+
+        .skills-category {
+            margin-bottom: 3rem;
+        }
+
+        .skills-category h3 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.5rem;
+            background: var(--card-bg);
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .skill-item i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .resume-section {
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .btn:hover {
+            background: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .social-links a {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        footer {
+            background: var(--card-bg);
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .education-grid, .experience-grid, .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">JKB</div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#resume">Resume</a></li>
+            </ul>
+        </nav>
+        <button id="theme-toggle"><i class="fas fa-moon"></i></button>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <!-- Replace with your profile picture -->
+                <img src="https://example.com/your-profile-picture.jpg" alt="Jeevan Kumar Banoth" class="profile-image">
+                <h1>Jeevan Kumar Banoth</h1>
+                <p>Data Science Graduate Student | Program Analyst</p>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2 class="section-title">About Me</h2>
+                <div class="card">
+                    <div class="about-content">
+                        <p>👋 Hey there! I'm Jeevan, a Data Science aficionado with a knack for turning complex problems into elegant solutions. From coding smart algorithms to building innovative projects, I'm all about making data work for us.</p>
+                        <p>My journey in the world of data science has been driven by an insatiable curiosity and a desire to create meaningful impact through technology. Whether it's developing machine learning models, optimizing algorithms, or diving deep into data analysis, I bring a blend of technical expertise and creative problem-solving to every project.</p>
+                        <p>Currently pursuing my Master's in Data Science at UMass Dartmouth, I'm constantly exploring new technologies and methodologies to stay at the forefront of this rapidly evolving field. My experience as a Program Analyst at Cognizant has given me valuable insights into real-world applications of data science and software development.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="education">
+            <div class="container">
+                <h2 class="section-title">Education</h2>
+                <div class="education-grid">
+                    <div class="education-item">
+                        <h3>Master's in Data Science (MSDS)</h3>
+                        <p>University of Massachusetts, Dartmouth</p>
+                        <p>GPA: 3.84 | Aug 2023 – May 2025</p>
+                        <p>Relevant Courses:</p>
+                        <ul>
+                            <li>High performance scientific computing</li>
+                            <li>Database Design</li>
+                            <li>Network Security</li>
+                            <li>Machine learning</li>
+                            <li>Big data</li>
+                            <li>Data mining</li>
+                            <li>Mathematical Statistics</li>
+                        </ul>
+                    </div>
+                    <div class="education-item">
+                        <h3>B.Tech in Electronics and Communication Engineering</h3>
+                        <p>Mahatma Gandhi Institute of Technology (MGIT), Hyderabad</p>
+                        <p>July 2018 – July 2022</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <div class="container">
+                <h2 class="section-title">Work Experience</h2>
+                <div class="experience-grid">
+                    <div class="experience-item">
+                        <h3>Program Analyst trainee</h3>
+                        <p>Cognizant Technology Solutions, India</p>
+                        <p>Sept 2022 – Aug 2023</p>
+                        <ul>
+                            <li>Joined as a full-time employee after successful completion of internship</li>
+                            <li>Gained knowledge in various technologies including Java, Selenium, SDLC, Agile methodologies</li>
+                            <li>Worked on real-world problems through mini, major, and Hackathon projects</li>
+                        </ul>
+                    </div>
+                    <div class="experience-item">
+                        <h3>Quality Engineer Intern</h3>
+                        <p>Cognizant India</p>
+                        <p>Feb 2022 – July 2022</p>
+                        <ul>
+                            <li>Gained practical experience in software testing and quality assurance</li>
+                            <li>Learned various concepts including HTML, CSS, Selenium, SDLC</li>
+                            <li>Excelled in skills and cleared the SME interview</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <div class="container">
+                <h2 class="section-title">Technical Skills</h2>
+                
+                <div class="skills-section">
+                    <div class="skills-category">
+                        <h3>Programming Languages</h3>
+                        <div class="skills-grid">
+                            <div class="skill-item">
+                                <i class="fab fa-python"></i>
+                                <p>Python</p>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fab fa-java"></i>
+                                <p>Java</p>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fas fa-code"></i>
+                                <p>R</p>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fas fa-terminal"></i>
+                                <p>C</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skills-category">
+                        <h3>Software Development</h3>
+                        <div class="skills-grid">
+                            <div class="skill-item">
+                                <i class="fas fa-code-branch"></i>
+                                <p>Data Structures</p>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fas fa-project-diagram"></i>
+                                <p>Algorithms</p>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fas fa-cubes"></i>
+                                <p>OOP</p>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fas fa-tasks"></i>
+                                <p>Agile Methodologies</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skills-category">
+                        <h3>Web Technologies</h3>
+                        <div class="skills-grid">
+                            <div class="skill-item">
+                                <i class="fab fa-html5"></i>
+                                <p>HTML</p>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fab fa-css3-alt"></i>
+                                <p>CSS</p>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fab fa-js"></i>
+                                <p>JavaScript</p>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fas fa-code"></i>
+                                <p>XML</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skills-category">
+                        <h3>Data & Analytics</h3>
+                        <div class="skills-grid">
+                            <div class="skill-item">
+                                <i class="fas fa-chart-bar"></i>
+                                <p>Tableau</p>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fas fa-chart-line"></i>
+                                <p>Visual Analytics</p>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fas fa-table"></i>
+                                <p>Microsoft Excel</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skills-category">
+                        <h3>Databases</h3>
+                        <div class="skills-grid">
+                            <div class="skill-item">
+                                <i class="fas fa-database"></i>
+                                <p>SQL</p>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fas fa-leaf"></i>
+                                <p>MongoDB</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skills-category">
+                        <h3>Cloud Computing</h3>
+                        <div class="skills-grid">
+                            <div class="skill-item">
+                                <i class="fab fa-aws"></i>
+                                <p>AWS EC2</p>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fab fa-aws"></i>
+                                <p>QuickSight</p>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fab fa-aws"></i>
+                                <p>SageMaker</p>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fab fa-aws"></i>
+                                <p>S3</p>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fab fa-aws"></i>
+                                <p>DynamoDB</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skills-category">
+                        <h3>Others</h3>
+                        <div class="skills-grid">
+                            <div class="skill-item">
+                                <i class="fas fa-brain"></i>
+                                <p>Machine Learning</p>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fas fa-vial"></i>
+                                <p>Unit Testing</p>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fab fa-git-alt"></i>
+                                <p>Git</p>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fas fa-robot"></i>
+                                <p>Selenium</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="container">
+                <h2 class="section-title">Projects</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <h3>Posture Recognition and Servo Motor Control</h3>
+                        <p>Jan 2022 – May 2022</p>
+                        <p>Developed and implemented computer vision algorithms for posture recognition and arm angle tracking, enabling precise control of a robotic arm via Bluetooth technology.</p>
+                        <!-- Add your GitHub repository link here -->
+                        <a href="#" class="btn">View Project</a>
+                    </div>
+
+                    <div class="project-card">
+                        <h3>Road Sign Detection Model Optimization</h3>
+                        <p>Aug 2023 - Dec 2023</p>
+                        <p>Optimized deep learning model training for road sign detection on a Mac M2 system, achieving significant speedups through parallelization techniques.</p>
+                        <!-- Add your GitHub repository link here -->
+                        <a href="#" class="btn">View Project</a>
+                    </div>
+
+                    <div class="project-card">
+                        <h3>Twitter Sentiment Analysis using R</h3>
+                        <p>May 2021 – July 2021</p>
+                        <p>Conducted sentiment analysis on Twitter data using supervised learning techniques, predicting sentiment polarity with models like Multinomial Logistic Regression and Support Vector Machines.</p>
+                        <!-- Add your GitHub repository link here -->
+                        <a href="#" class="btn">View Project</a>
+                    </div>
+
+                    <div class="project-card">
+                        <h3>Heart Disease Diagnosis Prediction</h3>
+                        <p>Jan 2024 – May 2024</p>
+                        <p>Developed predictive models for heart disease diagnosis using machine learning algorithms. Analyzed key medical attributes to enhance early detection and risk assessment.</p>
+                        <!-- Add your GitHub repository link here -->
+                        <a href="#" class="btn">View Project</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="resume" class="resume-section">
+            <div class="container">
+                <h2 class="section-title">Ready to Learn More?</h2>
+                <p class="about-content">Dive deeper into my professional journey and discover how my skills and experiences align with your needs.</p>
+                <!-- Add your resume link here -->
+                <a href="#" class="btn">View My Resume</a>
+            </div>
+        </section>
+
+        <footer>
+            <div class="container">
+                <div class="social-links">
+                    <!-- Add your social media links here -->
+                    <a href="https://www.linkedin.com/in/your-linkedin" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://github.com/your-github" target="_blank" rel="noopener noreferrer" title="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://leetcode.com/your-leetcode" target="_blank" rel="noopener noreferrer" title="LeetCode">
+                        <i class="fas fa-code"></i>
+                    </a>
+                    <a href="https://your-portfolio-url.com" target="_blank" rel="noopener noreferrer" title="Portfolio">
+                        <i class="fas fa-globe"></i>
+                    </a>
+                    <a href="https://www.instagram.com/your-instagram" target="_blank" rel="noopener noreferrer" title="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="mailto:jbanoth@umassd.edu" title="Email">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+                <p>&copy; 2024 Jeevan Kumar Banoth. All rights reserved.</p>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        const sections = gsap.utils.toArray('section');
+        sections.forEach((section, i) => {
+            gsap.from(section, {
+                opacity: 0,
+                y: 50,
+                duration: 1,
+                scrollTrigger: {
+                    trigger: section,
+                    start: 'top 80%',
+                    end: 'bottom 20%',
+                    toggleActions: 'play none none reverse'
+                }
+            });
+        });
+
+        gsap.utils.toArray('.skill-item').forEach(item => {
+            gsap.from(item, {
+                opacity: 0,
+                scale: 0.8,
+                duration: 0.5,
+                scrollTrigger: {
+                    trigger: item,
+                    start: 'top 90%',
+                    end: 'bottom 10%',
+                    toggleActions: 'play none none reverse'
+                }
+            });
+        });
+
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            const icon = themeToggle.querySelector('i');
+            if (body.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        });
+    </script>
+</body>
+</html>
